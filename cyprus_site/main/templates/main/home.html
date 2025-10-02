@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Home — Cyprus 🌞{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Welcome to Cyprus 🇨🇾</h1>
+    <p>The island of sun, sea, and history. Discover the best places, food, and travel tips.</p>
+    <a href="{% url "about" %}" class="btn">Learn More</a>
+</section>
+
+<section class="highlights">
+    <h2>What Awaits You in Cyprus</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Beaches</h3>
+            <p>Turquoise waters and golden sand — perfect for relaxation and surfing.</p>
+        </div>
+        <div class="card">
+            <h3>History</h3>
+            <p>Ancient ruins, castles, and legends about the goddess Aphrodite.</p>
+        </div>
+        <div class="card">
+            <h3>Food</h3>
+            <p>Halloumi, meze, and the freshest seafood — the true taste of Cyprus.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
