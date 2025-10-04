@@ -26,3 +26,19 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('username', 'email', 'photo')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'photo': forms.FileInput(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'username': 'Username',
+            'email': 'Email',
+            'photo': 'Photo',
+        }
+

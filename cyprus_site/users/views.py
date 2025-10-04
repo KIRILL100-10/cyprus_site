@@ -1,13 +1,15 @@
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from .forms import RegisterForm, UserLoginForm
+from .forms import RegisterForm, UserLoginForm, ProfileForm
+from .mixins import ProfileMixin
 
 
 class RegisterView(SuccessMessageMixin, CreateView):
@@ -28,4 +30,22 @@ class UserLogoutView(SuccessMessageMixin, View):
         logout(request)
         messages.success(request, 'You have been logged out.')
         return redirect('home')
+
+
+class Profile(LoginRequiredMixin, ProfileMixin, DetailView):
+    template_name = 'users/profile.html'
+    context_object_name = 'profile'
+
+
+class ProfileUpdate(LoginRequiredMixin, ProfileMixin, SuccessMessageMixin, UpdateView):
+    form_class = ProfileForm
+    template_name = 'users/profile_update.html'
+    success_message = 'Profile Update Successful!'
+    success_url = reverse_lazy('profile')
+
+
+class ProfileDelete(LoginRequiredMixin, ProfileMixin, SuccessMessageMixin, DeleteView):
+    template_name = 'users/profile_delete.html'
+    success_message = 'Profile Delete Successful!'
+    success_url = reverse_lazy('home')
 
