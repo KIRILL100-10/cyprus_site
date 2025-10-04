@@ -31,6 +31,17 @@
         </nav>
     </header>
 
+{% if messages %}
+<div class="messages" id="messages">
+    {% for message in messages %}
+      <div class="alert {{ message.tags }}">
+        {{ message }}
+        <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
     <main>
         {% block content %}{% endblock %}
     </main>
@@ -38,5 +49,6 @@
     <footer>
         <p>© 2025 Cyprus Guide. All rights reserved. </p>
     </footer>
+    <script src="{% static 'js/messages.js' %}"></script>
 </body>
 </html>

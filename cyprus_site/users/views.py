@@ -13,8 +13,8 @@ from .forms import RegisterForm, UserLoginForm
 class RegisterView(SuccessMessageMixin, CreateView):
     form_class = RegisterForm
     template_name = 'users/register.html'
-    success_url = reverse_lazy('home')
     success_message = 'Registration Successful!'
+    success_url = reverse_lazy('login')
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
