@@ -35,22 +35,6 @@ h1, h2, h3 {
     font-weight: 700;
 }
 
-.btn {
-    background: #ffde59;
-    color: #333;
-    margin-top: 15px;
-    padding: 12px 25px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s;
-    display: inline-block;
-}
-
-.btn:hover {
-    background: #ffc107;
-}
-
 header {
     background: #0078a8;
     padding: 15px 125px;
@@ -158,34 +142,85 @@ footer {
     margin-top: 40px;
 }
 
-.btn_home {
-    background: #ffde59;
-    color: #333;
-    margin-top: 15px;
+.btn {
+    font-size: 17px;
     padding: 12px 25px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s;
-    display: inline-block;
-}
-
-
-.btn_authentication {
-    width: 100%;
-    padding: 12px;
-    background: #0078a8;
-    color: white;
-    border: none;
     border-radius: 6px;
-    font-size: 1em;
+    text-decoration: none;
     font-weight: 600;
+    display: inline-block;
+    transition: background 0.3s, transform 0.1s;
     cursor: pointer;
-    transition: background 0.2s;
+    border: none;
 }
 
 .btn:hover {
-    background: #005f84;
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: #007bff;
+    color: #fff;
+}
+.btn-primary:hover {
+    background: #0069d9;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: #fff;
+}
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-success {
+    background: #28a745;
+    color: #fff;
+}
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: #fff;
+}
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+.btn-warning:hover {
+    background: #e0a800;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: #fff;
+}
+.btn-info:hover {
+    background: #138496;
+}
+
+.btn-light {
+    background: #f8f9fa;
+    color: #212529;
+    border: 1px solid #ddd;
+}
+.btn-light:hover {
+    background: #e2e6ea;
+}
+
+.btn-dark {
+    background: #343a40;
+    color: #fff;
+}
+.btn-dark:hover {
+    background: #23272b;
 }
 
 .auth-wrapper {
@@ -313,4 +348,82 @@ input:focus, select:focus, textarea:focus {
 @keyframes fadeout {
     from {opacity: 1;}
     to {opacity: 0;}
+}
+
+.profile-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.profile-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 3px solid #0078a8;
+}
+
+.profile-info {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #444;
+}
+
+.profile-info p {
+    margin: 8px 0;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.delete-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: 60px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.delete-card h1 {
+    color: #e53935;
+    margin-bottom: 20px;
+}
+
+.delete-card p {
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px); 
+    padding: 20px;
+}
+
+.center-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.container p {
+    margin-bottom: 15px;
 }

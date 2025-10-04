@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="center-wrapper">
+    <div class="center-card">
+        {% if profile.photo %}
+            <img src="{{ profile.photo.url }}" alt="Profile photo" style="width:140px; height:140px; object-fit:cover; border-radius:50%; margin-bottom:20px; border:3px solid #0078a8;">
+        {% else %}
+            <img src="{% static 'images/user.png' %}" alt="Default avatar" style="width:140px; height:140px; object-fit:cover; border-radius:50%; margin-bottom:20px; border:3px solid #0078a8;">
+        {% endif %}
+
+        <div class="profile-info">
+            <p><strong>Username:</strong> {{ profile.username }}</p>
+            <p><strong>Email:</strong> {{ profile.email }}</p>
+        </div>
+
+        <div class="profile-actions">
+            <a href="{% url 'home' %}" class="btn btn-secondary">🗑 Back to Home</a>
+            <a href="{% url 'users:update_profile' %}" class="btn btn-success">✏️ Edit</a>
+            <a href="{% url 'users:delete_profile' %}" class="btn btn-danger">🗑 Delete</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

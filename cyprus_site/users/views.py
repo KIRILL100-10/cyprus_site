@@ -41,7 +41,7 @@ class ProfileUpdate(LoginRequiredMixin, ProfileMixin, SuccessMessageMixin, Updat
     form_class = ProfileForm
     template_name = 'users/profile_update.html'
     success_message = 'Profile Update Successful!'
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('home')
 
 
 class ProfileDelete(LoginRequiredMixin, ProfileMixin, SuccessMessageMixin, DeleteView):
