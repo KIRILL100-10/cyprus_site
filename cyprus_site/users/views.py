@@ -1,14 +1,16 @@
 from django.contrib import messages
-from django.contrib.auth import logout, get_user_model
+from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView, \
+    PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from .forms import RegisterForm, UserLoginForm, ProfileForm, UserPasswordChangeForm
+from .forms import RegisterForm, UserLoginForm, ProfileForm, UserPasswordChangeForm, UserPasswordResetForm, \
+    UserPasswordResetConfirmForm
 from .mixins import ProfileMixin
 
 
@@ -50,7 +52,7 @@ class ProfileDelete(LoginRequiredMixin, ProfileMixin, SuccessMessageMixin, Delet
     success_url = reverse_lazy('home')
 
 
-class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+class UserPasswordChangeView(LoginRequiredMixin, SuccessMessageMixin, PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'users/password_change.html'
     success_message = 'Password Change Successful!'
@@ -59,4 +61,27 @@ class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
 class UserPasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'users/password_change_done.html'
+
+
+class UserPasswordResetView(SuccessMessageMixin, PasswordResetView):
+    form_class = UserPasswordResetForm
+    template_name = 'users/password_reset.html'
+    email_template_name = 'users/password_reset_email.html'
+    success_message = 'Password Reset Successful!'
+    success_url = reverse_lazy('users:password_reset_done')
+
+
+class UserPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'users/password_reset_done.html'
+
+
+class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
+    form_class = UserPasswordResetConfirmForm
+    template_name = 'users/password_reset_confirm.html'
+    success_message = 'Password Reset Confirm Successful!'
+    success_url = reverse_lazy('users:password_reset_complete')
+
+
+class UserPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'users/password_reset_complete.html'
 
