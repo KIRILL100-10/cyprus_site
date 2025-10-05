@@ -17,6 +17,7 @@
                 <li><a href="{% url "about" %}">About</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url "users:profile" %}">Profile</a></li>
+                <li><a href="{% url "users:contact" %}">Contact</a></li>
                 <li><a href="#">History</a></li>
                 <li><a href="#">Facts</a></li>
                 <li><a href="#">Cypriots</a></li>

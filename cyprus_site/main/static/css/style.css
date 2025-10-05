@@ -427,3 +427,7 @@ input:focus, select:focus, textarea:focus {
 .container p {
     margin-bottom: 15px;
 }
+
+.contact-form .form-group label {
+    text-align: left;
+}

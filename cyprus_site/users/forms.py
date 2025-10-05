@@ -58,3 +58,8 @@ class UserPasswordResetConfirmForm(SetPasswordForm):
     new_password1 = forms.CharField(label='New Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     new_password2 = forms.CharField(label='New Password confirmation', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+
+class FeedbackForm(forms.Form):
+    email = forms.EmailField(label='Your Email', widget=forms.EmailInput(attrs={'class': 'form-control'}), required=True)
+    subject = forms.CharField(label='Subject', widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=150, required=True)
+    message = forms.CharField(label='Message', widget=forms.Textarea(attrs={'class': 'form-control'}), required=True)

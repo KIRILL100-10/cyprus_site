@@ -4,14 +4,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView, PasswordResetView, \
     PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.views import View
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, FormView, TemplateView
 from django.urls import reverse_lazy
 
 from .forms import RegisterForm, UserLoginForm, ProfileForm, UserPasswordChangeForm, UserPasswordResetForm, \
-    UserPasswordResetConfirmForm
+    UserPasswordResetConfirmForm, FeedbackForm
 from .mixins import ProfileMixin
+
+import os
+from dotenv import load_dotenv
 
 
 class RegisterView(SuccessMessageMixin, CreateView):
@@ -85,3 +89,22 @@ class UserPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView
 class UserPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'users/password_reset_complete.html'
 
+
+class ContactView(LoginRequiredMixin, SuccessMessageMixin, FormView):
+    form_class = FeedbackForm
+    template_name = 'users/contact.html'
+    success_message = 'Thank You for your feedback.'
+    success_url = reverse_lazy('users:contact_done')
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        email = form.cleaned_data.get('email', 'No email')
+        subject = form.cleaned_data.get('subject', 'No subject')
+        message = form.cleaned_data.get('message', 'No message')
+
+        print(send_mail(subject=subject, message=message, from_email=email, recipient_list=[os.getenv('EMAIL_CONTACT')], fail_silently=False))
+        return super().form_valid(form)
+
+
+class ContactDoneView(LoginRequiredMixin, TemplateView):
+    template_name = 'users/contact_done.html'

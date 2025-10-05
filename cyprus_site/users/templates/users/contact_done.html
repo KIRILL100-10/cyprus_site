@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Message Sent | Cyprus 🌞{% endblock %}
+
+{% block content %}
+<div class="center-wrapper">
+    <div class="center-card">
+        <h1>Thank You!</h1>
+        <p style="padding-bottom: 25px;">Your message has been sent successfully. We will get back to you soon.</p>
+
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
