@@ -54,7 +54,7 @@ class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'users/password_change.html'
     success_message = 'Password Change Successful!'
-    success_url = reverse_lazy('password_change_done')
+    success_url = reverse_lazy('users:password_change_done')
 
 
 class UserPasswordChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
