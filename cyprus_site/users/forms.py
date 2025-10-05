@@ -1,7 +1,7 @@
 from captcha.fields import CaptchaField, CaptchaTextInput
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 
 
 class RegisterForm(UserCreationForm):
@@ -42,3 +42,8 @@ class ProfileForm(forms.ModelForm):
             'photo': 'Photo',
         }
 
+
+class UserPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(label='Old Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password1 = forms.CharField(label='New Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password2 = forms.CharField(label='New Password confirmation', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
