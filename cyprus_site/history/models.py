@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -49,3 +50,18 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('article', kwargs={'article_slug': self.slug})
 
+
+class Comment(models.Model):
+    article = models.ForeignKey('Article', on_delete=models.SET_NULL, null=True, related_name='comments', verbose_name='Article')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, related_name='comments', verbose_name='Author')
+    text = models.TextField(verbose_name='Comment')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
+
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+        ordering = ('-created_at',)
+
+    def __str__(self):
+        return f'{self.author}: {self.text[:25]}'

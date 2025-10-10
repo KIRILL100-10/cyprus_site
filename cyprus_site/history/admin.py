@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Article
+from .models import Category, Article, Comment
 
 
 @admin.register(Category)
@@ -18,3 +18,12 @@ class ArticleAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
     search_fields = ('title',)
     prepopulated_fields = {'slug': ('title',)}
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'text', 'created_at', 'updated_at')
+    list_display_links = ('id', 'author')
+    list_per_page = 5
+    ordering = ('-created_at',)
+    search_fields = ('text',)
