@@ -5,6 +5,7 @@ app_name = 'history'
 
 urlpatterns = [
     path('', views.ArticleList.as_view(), name='article_list'),
+    path('search/', views.ArticleSearch.as_view(), name='article_search'),
     path('article/detail/<slug:article_slug>/', views.ArticleDetail.as_view(), name='article_detail'),
     path('category/articles/<slug:category_slug>/', views.ArticleCategory.as_view(), name='article_category'),
 ]

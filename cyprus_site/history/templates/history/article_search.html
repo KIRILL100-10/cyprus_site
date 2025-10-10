@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Articles by Category — Cyprus History{% endblock %}
+
+
+{% block title %}Search — Cyprus History{% endblock %}
 
 {% block content %}
 <section class="container" style="text-align:center; margin-top:40px;">
-    <h1 style="color:#0078a8; margin-bottom:30px;">Articles in “{{ view.kwargs.category_slug|title }}”</h1>
+    <h1 style="color:#0078a8;">🔍 Search Articles</h1>
+
+    <form method="get" action="{% url 'history:article_search' %}" style="margin:25px 0;">
+        <input type="text" name="q" placeholder="Enter your search..."
+               value="{{ query }}"
+               style="padding:10px 15px; width:60%; max-width:400px; border:1px solid #ccc; border-radius:6px;">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if query %}
+        <h3 style="margin-bottom:30px;">Results for "<strong>{{ query }}</strong>": {{ articles|length }}</h3>
+    {% endif %}
 
     <div class="cards" style="justify-content:center;">
         {% for article in articles %}
@@ -21,20 +34,20 @@
                 </div>
             </div>
         {% empty %}
-            <p>No articles found in this category.</p>
+            <p>No articles found.</p>
         {% endfor %}
     </div>
 
     {% if is_paginated %}
     <div class="pagination" style="margin-top:40px;">
         {% if page_obj.has_previous %}
-            <a class="btn btn-light" href="?page={{ page_obj.previous_page_number }}">← Previous</a>
+            <a class="btn btn-light" href="?q={{ query }}&page={{ page_obj.previous_page_number }}">← Previous</a>
         {% endif %}
 
         <span style="margin:0 15px;">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
 
         {% if page_obj.has_next %}
-            <a class="btn btn-light" href="?page={{ page_obj.next_page_number }}">Next →</a>
+            <a class="btn btn-light" href="?q={{ query }}&page={{ page_obj.next_page_number }}">Next →</a>
         {% endif %}
     </div>
     {% endif %}

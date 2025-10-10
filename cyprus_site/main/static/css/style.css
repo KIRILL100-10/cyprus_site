@@ -431,3 +431,15 @@ input:focus, select:focus, textarea:focus {
 .contact-form .form-group label {
     text-align: left;
 }
+
+
+.categories a {
+    color: #0078a8;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.categories a:hover {
+    color: #ffde59;
+}
