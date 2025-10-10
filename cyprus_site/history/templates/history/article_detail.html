@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ article.title }} — Cyprus History{% endblock %}
+
+{% block content %}
+<section class="container" style="max-width:800px; margin:50px auto; text-align:center;">
+    <div class="center-card">
+        {% if article.image %}
+            <img src="{{ article.image.url }}" alt="{{ article.title }}" style="max-width:100%; border-radius:10px; margin-bottom:20px;">
+        {% endif %}
+
+        <h1 style="margin-bottom:15px; color:#0078a8;">{{ article.title }}</h1>
+
+        {% if article.category %}
+            <p style="margin-bottom:10px;">Category:
+                <a href="{% url 'history:article_category' article.category.slug %}" style="color:#0078a8;">
+                    {{ article.category.name }}
+                </a>
+            </p>
+        {% endif %}
+
+        <p style="font-size:0.9em; color:#666; margin-bottom:25px;">
+            Published on {{ article.created_at|date:"F j, Y" }}
+        </p>
+
+        <article style="text-align:justify; line-height:1.7; color:#333; font-size:1.05em;">
+            {{ article.content|linebreaks }}
+        </article>
+
+        <div style="margin-top:40px;">
+            <a href="{% url 'history:article_list' %}" class="btn btn-secondary">← Back to articles</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

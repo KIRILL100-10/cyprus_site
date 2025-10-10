@@ -9,7 +9,7 @@ from history.models import Article, Category
 class ArticleList(LoginRequiredMixin, ListView):
     model = Article
     context_object_name = 'articles'
-    template_name = 'article_list.html'
+    template_name = 'history/article_list.html'
     paginate_by = 4
 
     def get_context_data(self, **kwargs):
@@ -22,13 +22,13 @@ class ArticleDetail(LoginRequiredMixin, DetailView):
     model = Article
     context_object_name = 'article'
     slug_url_kwarg = 'article_slug'
-    template_name = 'article_detail.html'
+    template_name = 'history/article_detail.html'
 
 
 class ArticleCategory(LoginRequiredMixin, ListView):
     model = Category
     context_object_name = 'articles'
-    template_name = 'article_category.html'
+    template_name = 'history/article_category.html'
     paginate_by = 4
 
     def get_queryset(self):
