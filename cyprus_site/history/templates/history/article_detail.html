@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
 {% block title %}{{ article.title }} — Cyprus History{% endblock %}
 
 {% block content %}
@@ -31,5 +33,34 @@
             <a href="{% url 'history:article_list' %}" class="btn btn-secondary">← Back to articles</a>
         </div>
     </div>
+</section>
+
+<section class="container" style="max-width:800px; margin:40px auto;">
+    <div class="center-card" style="text-align:left;">
+        <h2 style="color:#0078a8; margin-bottom:20px;">💬 Comments</h2>
+
+        {% if comments %}
+            {% for comment in comments %}
+                <div style="border-bottom:1px solid #eee; padding:15px 0;">
+                    <p><strong>{{ comment.author }}</strong> <span style="color:#888;">— {{ comment.created_at|date:"F j, Y, H:i" }}</span></p>
+                    <p>{{ comment.text|linebreaks }}</p>
+
+                    {% if user == comment.author %}
+                        <div style="margin-top:10px;">
+                            <a href="{% url 'history:comment_update' comment.id %}?article_slug={{ article.slug }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{% url 'history:comment_delete' comment.id %}?article_slug={{ article.slug }}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No comments yet. Be the first to comment!</p>
+        {% endif %}
+    </div>
+
+    <div class="center-card" style="margin-top:30px;">
+    <h3 style="color:#0078a8; margin-bottom:15px;">Add a Comment</h3>
+    <a href="{% url 'history:create_comment' article.slug %}" class="btn btn-success">Add Comment</a>
+</div>
 </section>
 {% endblock %}

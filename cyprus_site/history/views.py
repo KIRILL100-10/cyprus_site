@@ -81,6 +81,11 @@ class CreateComment(LoginRequiredMixin, CreateView):
         comment.save()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['article_slug'] = self.kwargs['article_slug']
+        return context
+
     def get_success_url(self):
         return reverse_lazy('history:article_detail', kwargs={'article_slug': self.kwargs['article_slug']})
 
@@ -91,8 +96,13 @@ class EditComment(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'comment_id'
     template_name = 'history/comment_update.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['article_slug'] = self.kwargs.get('article_slug', self.object.article.slug)
+        return context
+
     def get_success_url(self):
-        return reverse_lazy('history:article_detail', kwargs={'article_slug': self.kwargs['article_slug']})
+        return reverse_lazy('history:article_detail', kwargs={'article_slug': self.object.article.slug})
 
 
 class DeleteComment(LoginRequiredMixin, DeleteView):
@@ -100,5 +110,10 @@ class DeleteComment(LoginRequiredMixin, DeleteView):
     pk_url_kwarg = 'comment_id'
     template_name = 'history/comment_delete.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['article_slug'] = self.kwargs.get('article_slug', self.object.article.slug)
+        return context
+
     def get_success_url(self):
-        return reverse_lazy('history:article_detail', kwargs={'article_slug': self.kwargs['article_slug']})
+        return reverse_lazy('history:article_detail', kwargs={'article_slug': self.object.article.slug})

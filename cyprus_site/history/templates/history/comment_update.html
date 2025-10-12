@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Edit Comment{% endblock %}
+
+{% block content %}
+<section class="center-wrapper">
+  <div class="center-card">
+    <h1 style="color:#0078a8;">Edit Comment</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+       <div class="btn-submit-wrapper">
+           <button type="submit" class="btn btn-primary">Edit</button>
+       </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

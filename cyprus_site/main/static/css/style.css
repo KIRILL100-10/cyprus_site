@@ -443,3 +443,19 @@ input:focus, select:focus, textarea:focus {
 .categories a:hover {
     color: #ffde59;
 }
+
+.center-card form {
+    text-align: left;
+}
+
+/* Поле комментария занимает всю ширину */
+.center-card form .form-control {
+    width: 100%;
+}
+
+/* Кнопка по центру */
+.center-card form .btn-submit-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}

@@ -15,7 +15,6 @@ from .forms import RegisterForm, UserLoginForm, ProfileForm, UserPasswordChangeF
 from .mixins import ProfileMixin
 
 import os
-from dotenv import load_dotenv
 
 
 class RegisterView(SuccessMessageMixin, CreateView):

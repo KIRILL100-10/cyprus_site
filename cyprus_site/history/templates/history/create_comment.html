@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Comment{% endblock %}
+
+{% block content %}
+<div class="center-wrapper">
+    <div class="center-card">
+        <h2 style="color:#0078a8; margin-bottom:20px;">Add Comment</h2>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="form-group mb-3">
+                {{ form.text.label_tag }}
+                {{ form.text }}
+            </div>
+
+            <div class="btn-submit-wrapper">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

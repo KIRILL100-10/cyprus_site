@@ -10,8 +10,10 @@
 
         <form method="post" style="margin-top:25px;">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Yes, Delete</button>
-            <a href="{% url 'users:profile' %}" class="btn btn-secondary">Cancel</a>
+            <div class="btn-submit-wrapper">
+                <button type="submit" class="btn btn-danger" style="margin-right: 15px;">Yes, Delete</button>
+                <a href="{% url 'users:profile' %}" class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
     </div>
 </div>
