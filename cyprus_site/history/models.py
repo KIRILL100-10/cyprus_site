@@ -22,7 +22,7 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={'category_slug': self.slug})
+        return reverse('history:article_category', kwargs={'category_slug': self.slug})
 
 
 class Article(models.Model):
@@ -48,7 +48,7 @@ class Article(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('article', kwargs={'article_slug': self.slug})
+        return reverse('history:article_detail', kwargs={'article_slug': self.slug})
 
 
 class Comment(models.Model):
@@ -65,3 +65,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.author}: {self.text[:25]}'
+
+    def get_absolute_url(self):
+        return reverse('history:comment_detail', kwargs={'comment_id': self.id})
