@@ -22,14 +22,14 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('history:article_category', kwargs={'category_slug': self.slug})
+        return reverse('articles:article_category', kwargs={'category_slug': self.slug})
 
 
 class Article(models.Model):
     title = models.CharField(max_length=100, unique=True, verbose_name='Title')
     slug = models.SlugField(max_length=100, unique=True, blank=True, verbose_name='Slug')
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True, related_name='articles', verbose_name='Category')
-    image = models.ImageField(upload_to='history/%Y/%m/%d', null=True, blank=True, verbose_name='Image')
+    image = models.ImageField(upload_to='articles/%Y/%m/%d', null=True, blank=True, verbose_name='Image')
     content = models.TextField(verbose_name='Content')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created at')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated at')
@@ -48,7 +48,7 @@ class Article(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('history:article_detail', kwargs={'article_slug': self.slug})
+        return reverse('articles:article_detail', kwargs={'article_slug': self.slug})
 
 
 class Comment(models.Model):
@@ -67,4 +67,4 @@ class Comment(models.Model):
         return f'{self.author}: {self.text[:25]}'
 
     def get_absolute_url(self):
-        return reverse('history:comment_detail', kwargs={'comment_id': self.id})
+        return reverse('articles:comment_detail', kwargs={'comment_id': self.id})

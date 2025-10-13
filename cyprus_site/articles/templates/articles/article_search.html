@@ -8,7 +8,7 @@
 <section class="container" style="text-align:center; margin-top:40px;">
     <h1 style="color:#0078a8;">🔍 Search Articles</h1>
 
-    <form method="get" action="{% url 'history:article_search' %}" style="margin:25px 0;">
+    <form method="get" action="{% url 'articles:article_search' %}" style="margin:25px 0;">
         <input type="text" name="q" placeholder="Enter your search..."
                value="{{ query }}"
                style="padding:10px 15px; width:60%; max-width:400px; border:1px solid #ccc; border-radius:6px;">
@@ -30,7 +30,7 @@
                 <h3 style="color:#0078a8; text-align: center;">{{ article.title }}</h3>
                 <p style="text-align:justify; color:#444;">{{ article.content|truncatewords:25 }}</p>
                 <div style="text-align:center;">
-                    <a href="{% url 'history:article_detail' article.slug %}" class="btn btn-info">Read more</a>
+                    <a href="{% url 'articles:article_detail' article.slug %}" class="btn btn-info">Read more</a>
                 </div>
             </div>
         {% empty %}
@@ -52,7 +52,7 @@
     </div>
     {% endif %}
     <div style="margin-top:30px; text-align:center;">
-        <a href="{% url 'history:article_list' %}" class="btn btn-secondary">← Back to All Articles</a>
+        <a href="{% url 'articles:article_list' %}" class="btn btn-secondary">← Back to All Articles</a>
     </div>
 </section>
 {% endblock %}

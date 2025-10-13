@@ -15,7 +15,7 @@
 
         {% if article.category %}
             <p style="margin-bottom:10px;">Category:
-                <a href="{% url 'history:article_category' article.category.slug %}" style="color:#0078a8;">
+                <a href="{% url 'articles:article_category' article.category.slug %}" style="color:#0078a8;">
                     {{ article.category.name }}
                 </a>
             </p>
@@ -30,7 +30,7 @@
         </article>
 
         <div style="margin-top:40px;">
-            <a href="{% url 'history:article_list' %}" class="btn btn-secondary">← Back to articles</a>
+            <a href="{% url 'articles:article_list' %}" class="btn btn-secondary">← Back to articles</a>
         </div>
     </div>
 </section>
@@ -47,8 +47,8 @@
 
                     {% if user == comment.author %}
                         <div style="margin-top:10px;">
-                            <a href="{% url 'history:comment_update' comment.id %}?article_slug={{ article.slug }}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{% url 'history:comment_delete' comment.id %}?article_slug={{ article.slug }}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{% url 'articles:comment_update' comment.id %}?article_slug={{ article.slug }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{% url 'articles:comment_delete' comment.id %}?article_slug={{ article.slug }}" class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     {% endif %}
                 </div>
@@ -60,7 +60,7 @@
 
     <div class="center-card" style="margin-top:30px;">
     <h3 style="color:#0078a8; margin-bottom:15px;">Add a Comment</h3>
-    <a href="{% url 'history:create_comment' article.slug %}" class="btn btn-success">Add Comment</a>
+    <a href="{% url 'articles:create_comment' article.slug %}" class="btn btn-success">Add Comment</a>
 </div>
 </section>
 {% endblock %}

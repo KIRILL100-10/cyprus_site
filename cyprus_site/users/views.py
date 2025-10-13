@@ -21,7 +21,7 @@ class RegisterView(SuccessMessageMixin, CreateView):
     form_class = RegisterForm
     template_name = 'users/register.html'
     success_message = 'Registration Successful!'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('users:login')
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
@@ -46,7 +46,7 @@ class ProfileUpdate(LoginRequiredMixin, ProfileMixin, SuccessMessageMixin, Updat
     form_class = ProfileForm
     template_name = 'users/profile_update.html'
     success_message = 'Profile Update Successful!'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('users:profile')
 
 
 class ProfileDelete(LoginRequiredMixin, ProfileMixin, SuccessMessageMixin, DeleteView):
