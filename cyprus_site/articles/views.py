@@ -4,14 +4,14 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from rest_framework.generics import get_object_or_404
 from rest_framework.reverse import reverse_lazy
 
-from history.forms import CommentForm
-from history.models import Article, Category, Comment
+from articles.forms import CommentForm
+from articles.models import Article, Category, Comment
 
 
 class ArticleList(LoginRequiredMixin, ListView):
     model = Article
     context_object_name = 'articles'
-    template_name = 'history/article_list.html'
+    template_name = 'articles/article_list.html'
     paginate_by = 3
 
     def get_context_data(self, **kwargs):
@@ -24,7 +24,7 @@ class ArticleDetail(LoginRequiredMixin, DetailView):
     model = Article
     context_object_name = 'article'
     slug_url_kwarg = 'article_slug'
-    template_name = 'history/article_detail.html'
+    template_name = 'articles/article_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,7 +35,7 @@ class ArticleDetail(LoginRequiredMixin, DetailView):
 class ArticleCategory(LoginRequiredMixin, ListView):
     model = Category
     context_object_name = 'articles'
-    template_name = 'history/article_category.html'
+    template_name = 'articles/article_category.html'
     paginate_by = 3
 
     def get_queryset(self):
@@ -46,7 +46,7 @@ class ArticleCategory(LoginRequiredMixin, ListView):
 class ArticleSearch(LoginRequiredMixin, ListView):
     model = Article
     context_object_name = 'articles'
-    template_name = 'history/article_search.html'
+    template_name = 'articles/article_search.html'
     paginate_by = 3
 
     def get_queryset(self):
@@ -67,12 +67,12 @@ class CommentDetail(LoginRequiredMixin, DetailView):
     model = Comment
     pk_url_kwarg = 'comment_id'
     context_object_name = 'comment'
-    template_name = 'history/comment_detail.html'
+    template_name = 'articles/comment_detail.html'
 
 
 class CreateComment(LoginRequiredMixin, CreateView):
     form_class = CommentForm
-    template_name = 'history/create_comment.html'
+    template_name = 'articles/create_comment.html'
 
     def form_valid(self, form):
         comment = form.save(commit=False)
@@ -87,14 +87,14 @@ class CreateComment(LoginRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('history:article_detail', kwargs={'article_slug': self.kwargs['article_slug']})
+        return reverse_lazy('articles:article_detail', kwargs={'article_slug': self.kwargs['article_slug']})
 
 
 class EditComment(LoginRequiredMixin, UpdateView):
     form_class = CommentForm
     model = Comment
     pk_url_kwarg = 'comment_id'
-    template_name = 'history/comment_update.html'
+    template_name = 'articles/comment_update.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -102,13 +102,13 @@ class EditComment(LoginRequiredMixin, UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('history:article_detail', kwargs={'article_slug': self.object.article.slug})
+        return reverse_lazy('articles:article_detail', kwargs={'article_slug': self.object.article.slug})
 
 
 class DeleteComment(LoginRequiredMixin, DeleteView):
     model = Comment
     pk_url_kwarg = 'comment_id'
-    template_name = 'history/comment_delete.html'
+    template_name = 'articles/comment_delete.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -116,4 +116,4 @@ class DeleteComment(LoginRequiredMixin, DeleteView):
         return context
 
     def get_success_url(self):
-        return reverse_lazy('history:article_detail', kwargs={'article_slug': self.object.article.slug})
+        return reverse_lazy('articles:article_detail', kwargs={'article_slug': self.object.article.slug})

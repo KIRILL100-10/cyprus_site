@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Articles by Category — Cyprus History{% endblock %}
+{% block title %}History — Cyprus 🌞{% endblock %}
 
 {% block content %}
 <section class="container" style="text-align:center; margin-top:40px;">
-    <h1 style="color:#0078a8; margin-bottom:30px;">Articles in “{{ view.kwargs.category_slug|title }}”</h1>
+    <h1 style="margin-bottom:30px; color:#0078a8;">📚 Historical Articles</h1>
+
+    <div style="margin-bottom:20px;">
+        <a href="{% url 'articles:article_search' %}" class="btn btn-primary">🔍 Search Articles</a>
+    </div>
+
+    <div class="categories" style="margin-bottom:30px;">
+        <h3 style="margin-bottom:10px;">Categories</h3>
+        <ul class="nav-links" style="flex-wrap: wrap; justify-content:center;">
+            {% for category in categories %}
+                <li><a href="{% url 'articles:article_category' category.slug %}">{{ category.name }} ({{ category.total }})</a></li>
+            {% empty %}
+                <li>No categories available.</li>
+            {% endfor %}
+        </ul>
+    </div>
 
     <div class="cards" style="justify-content:center;">
         {% for article in articles %}
@@ -14,14 +29,14 @@
                 {% else %}
                     <img src="{% static 'images/default.jpg' %}" alt="No image">
                 {% endif %}
-                <h3 style="color:#0078a8; text-align: center;">{{ article.title }}</h3>
+                <h3 style="color:#0078a8; text-align:center;">{{ article.title }}</h3>
                 <p style="text-align:justify; color:#444;">{{ article.content|truncatewords:25 }}</p>
                 <div style="text-align:center;">
-                    <a href="{% url 'history:article_detail' article.slug %}" class="btn btn-info">Read more</a>
+                    <a href="{% url 'articles:article_detail' article.slug %}" class="btn btn-info">Read more</a>
                 </div>
             </div>
         {% empty %}
-            <p>No articles found in this category.</p>
+            <p>No articles found.</p>
         {% endfor %}
     </div>
 
@@ -38,8 +53,5 @@
         {% endif %}
     </div>
     {% endif %}
-    <div style="margin-top:30px; text-align:center;">
-        <a href="{% url 'history:article_list' %}" class="btn btn-secondary">← Back to All Articles</a>
-    </div>
 </section>
 {% endblock %}

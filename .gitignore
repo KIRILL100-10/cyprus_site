@@ -217,3 +217,5 @@ __marimo__/
 
 /cyprus_site/media/
 /cyprus_site/staticfiles/
+
+.pylintrc

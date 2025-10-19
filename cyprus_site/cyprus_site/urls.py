@@ -8,7 +8,7 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path('', include('main.urls')),
     path('users/', include('users.urls', namespace='users')),
-    path('history/', include('history.urls', namespace='history')),
+    path('articles/', include('articles.urls', namespace='articles')),
 ]
 
 if settings.DEBUG:
